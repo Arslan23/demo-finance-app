@@ -1,15 +1,8 @@
 import { BaseEntity } from "src/common/entities/base.entity";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, Generated, PrimaryGeneratedColumn, Timestamp, UpdateDateColumn } from "typeorm";
-import { UsersModule } from "../users.module";
-
-export enum UserRole  {
-    ADMIN = "admin",
-    AGENT = "agent",
-    COMITE = "comite"   
-}
+import { Column, Entity, Generated, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class User extends BaseEntity {
+export class Demandeur extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -29,16 +22,24 @@ export class User extends BaseEntity {
     @Column({nullable: true})
     birthdate: Date;
 
-    @Column({type: "varchar",length: 150})
-    password: string;
+    @Column({type: "varchar",length: 150, nullable: true})
+    phone1: string;
 
+    @Column({type: "varchar",length: 150, nullable: true})
+    phone2: string;
+
+    @Column({type: "varchar",length: 150, nullable: true})
+    address: string;
+
+    @Column({type: "varchar",length: 150, nullable: true})
+    nationality: string;
+
+    @Column({nullable: false})
+    living_address_since: Date;
 
     @Column({default: true})
     isActive: boolean;
 
     @Column({default: false})
     isDeleted: boolean;
-
-    @Column({type: 'enum',enum: UserRole,default: UserRole.AGENT})
-    role: UserRole;
 }
