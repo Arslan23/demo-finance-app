@@ -2,12 +2,17 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { TypeDePretService } from './type-de-pret.service';
 import { CreateTypeDePretDto } from './dto/create-type-de-pret.dto';
 import { UpdateTypeDePretDto } from './dto/update-type-de-pret.dto';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { TypeDePret } from './entities/type-de-pret.entity';
 
+@ApiTags('Type de prêt')
 @Controller('type-de-pret')
 export class TypeDePretController {
   constructor(private readonly typeDePretService: TypeDePretService) {}
 
   @Post()
+  @ApiOperation({summary: 'Create a type de prêt'})
+  @ApiResponse({status: 401})
   create(@Body() createTypeDePretDto: CreateTypeDePretDto) {
     return this.typeDePretService.create(createTypeDePretDto);
   }
@@ -18,8 +23,14 @@ export class TypeDePretController {
   }
 
   @Get(':id')
+  @ApiOperation({summary: 'Show a a type de prêt'})
+  @ApiResponse({
+    status: 200, 
+    description: 'Record found',
+    type: TypeDePret
+  })
   findOne(@Param('id') id: string) {
-    return this.typeDePretService.findOne(+id);
+    return this.typeDePretService.showById(+id);
   }
 
   @Patch(':id')

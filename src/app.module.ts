@@ -2,8 +2,6 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from './users/users.module';
-import { User } from './users/entities/user.entity';
 import { DemandeurController } from './demandeur/demandeur.controller';
 import { DemandeurModule } from './demandeur/demandeur.module';
 import { Demandeur } from './demandeur/entities/demandeur.entity';
@@ -23,38 +21,46 @@ import { TypeGarantieController } from './type-garantie/type-garantie.controller
 import { TypeDePretController } from './type-de-pret/type-de-pret.controller';
 import { GarantieController } from './garantie/garantie.controller';
 import { DemandePretController } from './demande-pret/demande-pret.controller';
-import { UsersService } from './users/users.service';
 import { DemandeurService } from './demandeur/demandeur.service';
 import { DocumentService } from './document/document.service';
 import { TypeGarantieService } from './type-garantie/type-garantie.service';
 import { GarantieService } from './garantie/garantie.service';
 import { TypeDePretService } from './type-de-pret/type-de-pret.service';
 import { DemandePretService } from './demande-pret/demande-pret.service';
+import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { User } from './users/users.entity';
+import { UsersService } from './users/users.service';
 
-
+const entities = [User, TypeGarantie, TypeDePret, Garantie, Document, Demandeur, DemandePret];
 @Module({
   imports: [
-    TypeOrmModule.forRoot(
+    ConfigModule.forRoot(
       {
-        type: 'mysql',
-        host: 'localhost',
-        port: 3306,
-        username: 'root',
-        password: null,
-        database: 'dbasevf',
-        entities: [User, TypeGarantie, TypeDePret, Garantie, Document, Demandeur, DemandePret ],
-        synchronize: true,
-        autoLoadEntities: true,
-        logging: true
-       }
+        isGlobal: true,
+      },
     ),
+    TypeOrmModule.forRoot({
+      type: process.env.DB_TYPE as any,
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      entities: entities,
+      synchronize: true,
+      autoLoadEntities: true,
+      logging: true
+    }),
     UsersModule,
     DemandeurModule,
     DocumentModule,
     TypeGarantieModule,
     GarantieModule,
     TypeDePretModule,
-    DemandePretModule,    
+    DemandePretModule,
+    AuthModule,    
   ],  
   controllers: [AppController, UsersController, DemandeurController, DocumentController, TypeGarantieController, GarantieController, TypeDePretController, DemandePretController],
   providers: [AppService, UsersService, DemandeurService, DocumentService, TypeGarantieService, GarantieService, TypeDePretService, DemandePretService],
