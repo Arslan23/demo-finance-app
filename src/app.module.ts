@@ -2,38 +2,38 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DemandeurController } from './demandeur/demandeur.controller';
-import { DemandeurModule } from './demandeur/demandeur.module';
-import { Demandeur } from './demandeur/entities/demandeur.entity';
+import { ClaimantController } from './claimant/claimant.controller';
+import { ClaimantModule } from './claimant/claimant.module';
+import { Claimant } from './claimant/entities/claimant.entity';
 import { DocumentModule } from './document/document.module';
 import { DocumentController } from './document/document.controller';
-import { TypeGarantieModule } from './type-garantie/type-garantie.module';
-import { GarantieModule } from './garantie/garantie.module';
-import { TypeDePretModule } from './type-de-pret/type-de-pret.module';
-import { DemandePretModule } from './demande-pret/demande-pret.module';
-import { DemandePret } from './demande-pret/entities/demande-pret.entity';
-import { Garantie } from './garantie/entities/garantie.entity';
-import { TypeGarantie } from './type-garantie/entities/type-garantie.entity';
-import { TypeDePret } from './type-de-pret/entities/type-de-pret.entity';
+import { TypeGarantieModule } from './guarantee-type/guarantee-type.module';
 import { Document } from './document/entities/document.entity';
 import { UsersController } from './users/users.controller';
-import { TypeGarantieController } from './type-garantie/type-garantie.controller';
-import { TypeDePretController } from './type-de-pret/type-de-pret.controller';
-import { GarantieController } from './garantie/garantie.controller';
-import { DemandePretController } from './demande-pret/demande-pret.controller';
-import { DemandeurService } from './demandeur/demandeur.service';
+import { ClaimantService } from './claimant/claimant.service';
 import { DocumentService } from './document/document.service';
-import { TypeGarantieService } from './type-garantie/type-garantie.service';
-import { GarantieService } from './garantie/garantie.service';
-import { TypeDePretService } from './type-de-pret/type-de-pret.service';
-import { DemandePretService } from './demande-pret/demande-pret.service';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { User } from './users/users.entity';
 import { UsersService } from './users/users.service';
+import { LoanRequest } from './loan-request/entities/loan-request.entity';
+import { LoanRequestModule } from './loan-request/loan-request.module';
+import { LoanRequestService } from './loan-request/loan-request.service';
+import { LoanRequestController } from './loan-request/loan-request.controller';
+import { GuaranteeService } from './guarantee/guarantee.service';
+import { GuaranteeController } from './guarantee/guarantee.controller';
+import { Guarantee } from './guarantee/entities/guarantee.entity';
+import { GuaranteeModule } from './guarantee/guarantee.module';
+import { GuaranteeType } from './guarantee-type/entities/guarantee-type.entity';
+import { GuaranteeTypeService } from './guarantee-type/guarantee-type.service';
+import { GuarantieTypeController } from './guarantee-type/guarantee-type.controller';
+import { LoanType } from './loan-type/entities/loan-type.entity';
+import { LoanTypeModule } from './loan-type/loan-type.module';
+import { LoanTypeService } from './loan-type/loan-type.service';
+import { LoanTypeController } from './loan-type/loan-type.controller';
 
-const entities = [User, TypeGarantie, TypeDePret, Garantie, Document, Demandeur, DemandePret];
+const entities = [User, GuaranteeType, LoanType, Guarantee, Document, Claimant, LoanRequest];
 @Module({
   imports: [
     ConfigModule.forRoot(
@@ -54,16 +54,16 @@ const entities = [User, TypeGarantie, TypeDePret, Garantie, Document, Demandeur,
       logging: true
     }),
     UsersModule,
-    DemandeurModule,
+    ClaimantService,
     DocumentModule,
     TypeGarantieModule,
-    GarantieModule,
-    TypeDePretModule,
-    DemandePretModule,
+    GuaranteeModule,
+    LoanTypeModule,
+    LoanRequestModule,
     AuthModule,    
   ],  
-  controllers: [AppController, UsersController, DemandeurController, DocumentController, TypeGarantieController, GarantieController, TypeDePretController, DemandePretController],
-  providers: [AppService, UsersService, DemandeurService, DocumentService, TypeGarantieService, GarantieService, TypeDePretService, DemandePretService],
+  controllers: [AppController, UsersController, ClaimantController, DocumentController, GuarantieTypeController, GuaranteeController, LoanTypeController, LoanRequestController],
+  providers: [AppService, UsersService, ClaimantService, DocumentService, GuaranteeTypeService, GuaranteeService, LoanTypeService, LoanRequestService],
 })
 export class AppModule {
     
