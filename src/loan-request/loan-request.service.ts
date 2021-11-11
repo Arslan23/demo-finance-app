@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { ClaimantService } from 'src/claimant/claimant.service';
+import { Claimant } from 'src/claimant/entities/claimant.entity';
 import { CreateLoanRequestDto } from './dto/create-loan-request.dto';
 import { UpdateLoanRequestDto } from './dto/update-loan-request.dto';
 import { LoanRequest } from './entities/loan-request.entity';
@@ -6,6 +8,8 @@ import { LoanRequest } from './entities/loan-request.entity';
 @Injectable()
 export class LoanRequestService {
     async create(createLoanRequestDto: CreateLoanRequestDto) {
+    let claimant = Claimant.create(createLoanRequestDto.claimant);
+    createLoanRequestDto.claimant = claimant;
     const demandePret = LoanRequest.create(createLoanRequestDto);
     await demandePret.save();
     return demandePret;
