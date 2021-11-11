@@ -10,9 +10,7 @@ export class LoanRequestService {
     async create(createLoanRequestDto: CreateLoanRequestDto) {
     let claimant = Claimant.create(createLoanRequestDto.claimant).save();
     createLoanRequestDto.claimant = await claimant;
-    console.log("Nouvelle objet: ", createLoanRequestDto);
     const demandePret = LoanRequest.create(createLoanRequestDto);
-    console.log("Demande de Prêt: ", demandePret);
     await demandePret.save();
     return demandePret;
    }
