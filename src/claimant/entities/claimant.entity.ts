@@ -46,6 +46,10 @@ export class Claimant extends BaseEntity {
     @ApiProperty()
     @Column({type: "varchar",length: 150, nullable: true})
     phone2: string;
+
+    @ApiProperty()
+    @Column({type: "varchar",length: 150, nullable: true})
+    city: string;
      
     @ApiProperty()
     @Column({type: "varchar",length: 150, nullable: true})

@@ -26,4 +26,15 @@ export class CreateGuaranteeDto {
     @IsNotEmpty()
     idcard2: string;
 
+
+    
+    @ApiProperty()
+    @IsNotEmpty()
+    name1: string;
+
+    
+    @ApiProperty()
+    @IsNotEmpty()
+    name2: string;
+
 }

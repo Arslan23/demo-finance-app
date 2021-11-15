@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateLoanTypeDto } from './dto/create-loan-type.dto';
 import { UpdateLoanTypeDto } from './dto/update-loan-type.dto';
@@ -12,6 +13,7 @@ export class LoanTypeController {
   constructor(private readonly loantypeService: LoanTypeService) {}
 
   @Post()
+  @UseGuards(AuthGuard('api-key'))
   @ApiOperation({summary: 'Create a loan type'})
   @ApiResponse({status: 401})
   create(@Body() createLoanTypeDto: CreateLoanTypeDto) {
@@ -19,11 +21,13 @@ export class LoanTypeController {
   }
 
   @Get()
+  @UseGuards(AuthGuard('api-key'))
   findAll() {
     return this.loantypeService.findAll();
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard('api-key'))
   @ApiOperation({summary: 'Show a a type de prêt'})
   @ApiResponse({
     status: 200, 
@@ -35,11 +39,13 @@ export class LoanTypeController {
   }
 
   @Patch(':id')
+  @UseGuards(AuthGuard('api-key'))
   update(@Param('id') id: string, @Body() updateLoanTypeDto: UpdateLoanTypeDto) {
     return this.loantypeService.update(+id, updateLoanTypeDto);
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard('api-key'))
   remove(@Param('id') id: string) {
     return this.loantypeService.remove(+id);
   }

@@ -40,6 +40,10 @@ export class LoanRequest extends BaseEntity {
 
     @ApiProperty()
     @Column({default: true})
+    deferred_month: string;
+
+    @ApiProperty()
+    @Column({default: true})
     isActive: boolean;
      
     @ApiProperty()

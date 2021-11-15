@@ -19,6 +19,11 @@ export class CreateClaimantDto {
     @IsDate()
     birthdate: Date;
 
+
+    @ApiProperty()
+    @IsNotEmpty()
+    city: string;
+
     @ApiProperty()
     @IsPhoneNumber()
     phone1: string;
