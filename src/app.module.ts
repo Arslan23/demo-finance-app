@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -32,6 +32,7 @@ import { LoanType } from './loan-type/entities/loan-type.entity';
 import { LoanTypeModule } from './loan-type/loan-type.module';
 import { LoanTypeService } from './loan-type/loan-type.service';
 import { LoanTypeController } from './loan-type/loan-type.controller';
+import { CommonController } from './common/common.controller';
 
 const entities = [User, GuaranteeType, LoanType, Guarantee, Document, Claimant, LoanRequest];
 @Module({
@@ -62,9 +63,9 @@ const entities = [User, GuaranteeType, LoanType, Guarantee, Document, Claimant, 
     LoanRequestModule,
     AuthModule,    
   ],  
-  controllers: [AppController, UsersController, ClaimantController, DocumentController, GuarantieTypeController, GuaranteeController, LoanTypeController, LoanRequestController],
+  controllers: [AppController, UsersController, ClaimantController, DocumentController, GuarantieTypeController, GuaranteeController, LoanTypeController, LoanRequestController, CommonController],
   providers: [AppService, UsersService, ClaimantService, DocumentService, GuaranteeTypeService, GuaranteeService, LoanTypeService, LoanRequestService],
 })
 export class AppModule {
-    
+ 
 }

@@ -15,6 +15,10 @@ export class CreateLoanRequestDto {
 
     @ApiProperty()
     @IsNotEmpty()
+    deferred_month: string;
+
+    @ApiProperty()
+    @IsNotEmpty()
     duration: number;
 
 

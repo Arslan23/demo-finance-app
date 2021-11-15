@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateGuaranteeDto } from './dto/create-guarantee.dto';
 import { UpdateGuaranteeDto } from './dto/update-guarantee.dto';
@@ -18,11 +19,13 @@ export class GuaranteeController {
   }
 
   @Get()
+  @UseGuards(AuthGuard('api-key'))
   findAll() {
     return this.guarantieService.findAll();
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard('api-key'))
   @ApiOperation({summary: 'Show a garantite'})
   @ApiResponse({
     status: 200, 
@@ -34,11 +37,13 @@ export class GuaranteeController {
   }
 
   @Patch(':id')
+  @UseGuards(AuthGuard('api-key'))
   update(@Param('id') id: string, @Body() updateGuaranteeDto: UpdateGuaranteeDto) {
     return this.guarantieService.update(+id, updateGuaranteeDto);
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard('api-key'))
   remove(@Param('id') id: string) {
     return this.guarantieService.remove(+id);
   }

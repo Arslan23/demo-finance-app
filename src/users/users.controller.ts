@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './users.entity';
@@ -10,6 +11,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
+  @UseGuards(AuthGuard('api-key'))
   @ApiOperation({summary: 'Create a user'})
   @ApiResponse({status: 401})
   create(@Body() createUserDto: CreateUserDto)
@@ -19,6 +21,7 @@ export class UsersController {
 
 
   @Get(':id')
+  @UseGuards(AuthGuard('api-key'))
   @ApiOperation({summary: 'Show a user'})
   @ApiResponse({
     status: 200, 
@@ -31,6 +34,7 @@ export class UsersController {
   }
 
   @Get()
+  @UseGuards(AuthGuard('api-key'))
   @ApiOperation({summary: 'Show all users'})
   @ApiResponse({
     status: 200, 
@@ -41,6 +45,7 @@ export class UsersController {
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard('api-key'))
   @ApiOperation({summary: 'Remove a user'})
   @ApiResponse({
     status: 200, 

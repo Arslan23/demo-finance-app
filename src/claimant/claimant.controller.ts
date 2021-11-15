@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ClaimantService } from './claimant.service';
 import { CreateClaimantDto } from './dto/create-claimant.dto';
@@ -11,6 +12,7 @@ export class ClaimantController {
   constructor(private readonly claimantService: ClaimantService) {}
 
   @Post()
+  @UseGuards(AuthGuard('api-key'))
   @ApiOperation({summary: 'Create a claimant'})
   @ApiResponse({status: 401})
   create(@Body() createClaimantDto: CreateClaimantDto) {
@@ -18,11 +20,13 @@ export class ClaimantController {
   }
 
   @Get()
+  @UseGuards(AuthGuard('api-key'))
   findAll() {
     return this.claimantService.findAll();
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard('api-key'))
   @ApiOperation({summary: 'Show a demandeur'})
   @ApiResponse({
     status: 200, 
@@ -34,11 +38,13 @@ export class ClaimantController {
   }
 
   @Patch(':id')
+  @UseGuards(AuthGuard('api-key'))
   update(@Param('id') id: string, @Body() updateDemandeurDto: UpdateClaimantDto) {
     return this.claimantService.update(+id, updateDemandeurDto);
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard('api-key'))
   remove(@Param('id') id: string) {
     return this.claimantService.remove(+id);
   }

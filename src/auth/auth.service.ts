@@ -6,6 +6,8 @@ import { AuthLoginDto } from './dto/auth-login.dto';
 
 @Injectable()
 export class AuthService {
+    //KEYS
+    private  apiKeys: string[] = ['SgVkYp3s6v9y$B&E)H@McQeThWmZq4t7','NdRgUkXp2s5v8x/A?D(G+KbPeShVmYq3'];
     constructor(private userService: UsersService, private jwtService: JwtService){}
 
     async login(authLoginDto: AuthLoginDto)
@@ -28,6 +30,13 @@ export class AuthService {
         return user;
 
     }
+
+    validateApiKey(apiKey: string)
+    {
+        return this.apiKeys.find(apiK => apiKey === apiK);  
+    }
 }
+
+
 
 
