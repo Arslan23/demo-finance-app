@@ -37,6 +37,14 @@ export class Guarantee  extends BaseEntity{
     idcard2: string;
 
     @ApiProperty()
+    @Column({nullable: true})
+    name1: string;
+
+    @ApiProperty()
+    @Column({nullable: true})
+    name2: string;
+
+    @ApiProperty()
     @Column({default: true})
     isActive: boolean;
     
