@@ -33,10 +33,14 @@ import { LoanTypeModule } from './loan-type/loan-type.module';
 import { LoanTypeService } from './loan-type/loan-type.service';
 import { LoanTypeController } from './loan-type/loan-type.controller';
 import { CommonController } from './common/common.controller';
+import { MulterModule } from '@nestjs/platform-express';
 
 const entities = [User, GuaranteeType, LoanType, Guarantee, Document, Claimant, LoanRequest];
 @Module({
   imports: [
+    MulterModule.register({
+      dest: './files',
+    }),
     ConfigModule.forRoot(
       {
         isGlobal: true,

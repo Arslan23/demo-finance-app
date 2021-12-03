@@ -1,11 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty, IsNotEmptyObject } from "class-validator";
 import { Claimant } from "src/claimant/entities/claimant.entity";
+import { Guarantee } from "src/guarantee/entities/guarantee.entity";
 import { LoanType } from "src/loan-type/entities/loan-type.entity";
 
-export class CreateLoanRequestDto {
+export class CreateLoanClaimantRequestDto {
     
-    @ApiProperty()
+  /*  @ApiProperty()
     @IsNotEmpty()
     reference: string;
 
@@ -32,18 +33,12 @@ export class CreateLoanRequestDto {
 
     @ApiProperty()
     @IsNotEmptyObject()
-    claimant: Claimant;
+    claimant: Claimant;*/
+  
 
     @ApiProperty()
     @IsNotEmpty()
     idcard1: string;
-
-    
-    @ApiProperty()
-    filename1: string;
-
-    @ApiProperty()
-    filename2: string;
 
     @ApiProperty()
     @IsNotEmpty()

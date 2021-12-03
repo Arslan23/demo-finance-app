@@ -15,8 +15,9 @@ export class LoanTypeController {
   @Post()
   @UseGuards(AuthGuard('api-key'))
   @ApiOperation({summary: 'Create a loan type'})
-  @ApiResponse({status: 401})
+  @ApiResponse({status: 201})
   create(@Body() createLoanTypeDto: CreateLoanTypeDto) {
+    console.log(createLoanTypeDto);
     return this.loantypeService.create(createLoanTypeDto);
   }
 

@@ -1,18 +1,19 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty } from "class-validator";
+import { Guarantee } from "src/guarantee/entities/guarantee.entity";
 
 export class CreateDocumentDto {
     
     @ApiProperty()
-    @IsNotEmpty()
     path: string;
 
     @ApiProperty()
-    @IsNotEmpty()
     filename: string;
 
     @ApiProperty()
-    @IsNotEmpty()
     fileUrl: string;
 
+    @ApiProperty()
+    @IsNotEmpty()
+    guarantee: Guarantee;
 }

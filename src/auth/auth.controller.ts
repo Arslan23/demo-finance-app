@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { AuthLoginDto } from './dto/auth-login.dto';
 import { JwtAuthGuard } from './jwt-auth.guard';
@@ -11,6 +11,8 @@ export class AuthController {
 
   
   @Post()
+  @ApiOperation({summary: 'Connect like user'})
+  @ApiResponse({status: 401})
   async login(@Body() authLoginDto: AuthLoginDto)
   {
     return this.authService.login(authLoginDto);

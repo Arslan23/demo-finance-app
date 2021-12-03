@@ -5,8 +5,8 @@ import { AppService } from './app.service';
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
-  @Post('auth/login')
+ /* @Post('auth/login')
   async login(@Request() req) {
     return req.user;
-  }
+  }*/
 }

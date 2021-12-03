@@ -1,6 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpCode, UseInterceptors, UploadedFiles } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { FileFieldsInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { ApiConsumes, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { diskStorage } from 'multer';
+import { editFileName } from 'src/common/functions/editFilename';
+import { Document } from 'src/document/entities/document.entity';
 import { CreateGuaranteeDto } from './dto/create-guarantee.dto';
 import { UpdateGuaranteeDto } from './dto/update-guarantee.dto';
 import { Guarantee } from './entities/guarantee.entity';
@@ -12,9 +16,27 @@ export class GuaranteeController {
   constructor(private readonly guarantieService: GuaranteeService) {}
 
   @Post()
-  @ApiOperation({summary: 'Create a guarantie'})
+  @UseGuards(AuthGuard('api-key'))
+  @UseInterceptors(
+    FilesInterceptor('docs', 20, {
+      storage: diskStorage({
+        destination: './files',
+        filename: editFileName,
+      })
+    }),
+  )
+  @ApiConsumes('multipart/form-data')
+  @ApiOperation({summary: 'Create a guarantee'})
   @ApiResponse({status: 401})
-  create(@Body() createGuaranteeDto: CreateGuaranteeDto) {
+  create(@UploadedFiles() docs: Array<Express.Multer.File>,@Body() createGuaranteeDto: CreateGuaranteeDto) {
+    console.log(docs);
+    for(let i = 0; i <= docs.length; i++)
+    {
+      let doc: Document;
+      doc.fileUrl = docs[i].path;
+      doc.filename = docs[i].filename
+      createGuaranteeDto.documents.push(doc);
+    }
     return this.guarantieService.create(createGuaranteeDto);
   }
 

@@ -7,9 +7,8 @@ import { LoanType } from './entities/loan-type.entity';
 @Injectable()
 export class LoanTypeService {
   async create(createLoanTypeDto: CreateLoanTypeDto) {
-    const loanType = LoanType.create(createLoanTypeDto);
-    await LoanType.save(loanType);
-    return LoanType;
+    const loanType = await  LoanType.create(createLoanTypeDto).save();
+    return loanType;
    }
  
   async showById(id: number): Promise<LoanType>

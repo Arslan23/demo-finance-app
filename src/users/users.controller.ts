@@ -11,7 +11,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  @UseGuards(AuthGuard('api-key'))
+ //@UseGuards(AuthGuard('api-key'))
   @ApiOperation({summary: 'Create a user'})
   @ApiResponse({status: 401})
   create(@Body() createUserDto: CreateUserDto)
