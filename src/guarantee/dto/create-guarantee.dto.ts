@@ -8,33 +8,14 @@ export class CreateGuaranteeDto {
 
     @ApiProperty()
     @IsNotEmptyObject()
-    loanRequest: LoanRequest;
-
-    @ApiProperty()
-    @IsNotEmptyObject()
     guaranteeType: GuaranteeType;
 
     @ApiProperty()
     @IsNotEmptyObject()
-    document: Document;
+    loanRequest: LoanRequest;
 
     @ApiProperty()
-    @IsNotEmpty()
-    idcard1: string;
-
-    @ApiProperty()
-    @IsNotEmpty()
-    idcard2: string;
-
-
-    
-    @ApiProperty()
-    @IsNotEmpty()
-    name1: string;
-
-    
-    @ApiProperty()
-    @IsNotEmpty()
-    name2: string;
+    @IsNotEmptyObject()
+    documents: Document[];
 
 }

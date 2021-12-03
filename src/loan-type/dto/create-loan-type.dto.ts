@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsNumber } from "class-validator";
+import { isNotEmpty, IsNotEmpty, IsNumber } from "class-validator";
 
 export class CreateLoanTypeDto {
     @ApiProperty()
@@ -11,18 +11,18 @@ export class CreateLoanTypeDto {
     amount_min: number;
 
     @ApiProperty()
-    @IsNumber()
+    @IsNotEmpty()
     amount_max: number;
 
     @ApiProperty()
-    @IsNumber()
+    @IsNotEmpty()
     duration_min: number;
 
     @ApiProperty()
-    @IsNumber()
+    @IsNotEmpty()
     duration_max: number;
 
     @ApiProperty()
-    @IsNumber()
+    @IsNotEmpty()
     interest_rate: number;
 }

@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { BaseEntity, Column, CreateDateColumn, Entity, Generated, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Guarantee } from "src/guarantee/entities/guarantee.entity";
+import { BaseEntity, Column, CreateDateColumn, Entity, Generated, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class Document extends BaseEntity {
@@ -23,6 +24,10 @@ export class Document extends BaseEntity {
     @ApiProperty()
     @Column({type: "varchar",length: 150, nullable: true})
     fileUrl: string;
+
+    @ApiProperty()
+    @ManyToOne(()=> Guarantee, guarantee => guarantee.id)
+    guarantee: Guarantee;
 
     @ApiProperty()
     @Column({default: true})

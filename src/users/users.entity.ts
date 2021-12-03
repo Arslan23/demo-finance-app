@@ -31,10 +31,10 @@ export class User extends BaseEntity {
     @Column({nullable: true})
     birthdate: Date;
 
+
     @ApiProperty()
     @Column({type: "varchar",length: 150})
     password: string;
-
 
     @ApiProperty()
     @Column({default: true})
@@ -57,6 +57,9 @@ export class User extends BaseEntity {
     @Column()
     @UpdateDateColumn()
     updatedAt: Date;
+
+
+  
 
     @BeforeInsert()
     async hashPassword()

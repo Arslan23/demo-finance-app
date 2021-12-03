@@ -20,7 +20,8 @@ export class HeaderApiKeyStrategy extends PassportStrategy(Strategy, 'api-key') 
         if (this.configService.get<string>('API_KEY') === apiKey) {
             done(null, true);
         }
-        done(new UnauthorizedException(), null);
+            done(new UnauthorizedException(), null);
+       
     }
     
 }

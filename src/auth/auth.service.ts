@@ -33,6 +33,8 @@ export class AuthService {
 
     validateApiKey(apiKey: string)
     {
+        console.log("Api key");
+        console.log(apiKey);
         return this.apiKeys.find(apiK => apiKey === apiK);  
     }
 }

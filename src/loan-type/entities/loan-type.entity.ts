@@ -19,23 +19,23 @@ export class LoanType extends BaseEntity {
     name: string;
 
     @ApiProperty()
-    @Column({nullable: true, type: 'double'})
+    @Column('double')
     amount_min: number;
 
     @ApiProperty()
-    @Column({nullable: true, type: 'double'})
+    @Column('double')
     amount_max: number;
 
     @ApiProperty()
-    @Column({nullable: true, type: 'integer'})
+    @Column('integer')
     duration_min: number;
 
     @ApiProperty()
-    @Column({nullable: true,  type: 'integer'})
+    @Column('integer')
     duration_max: number;
 
     @ApiProperty()
-    @Column({nullable: true,  type: 'double'})
+    @Column('double')
     interest_rate: number;
 
     @ApiProperty()

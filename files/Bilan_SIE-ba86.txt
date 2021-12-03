@@ -1,0 +1,5 @@
+1- Conversions des unités
+2- Collecte des données
+3- Validation des données
+4- Configurations des revues du bilan
+5- Affichage du tableau statistique

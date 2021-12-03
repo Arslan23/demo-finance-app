@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Claimant } from "src/claimant/entities/claimant.entity";
+import { Guarantee } from "src/guarantee/entities/guarantee.entity";
 import { LoanType } from "src/loan-type/entities/loan-type.entity";
 import { BaseEntity, Column, CreateDateColumn, Entity, Generated, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
@@ -19,15 +20,15 @@ export class LoanRequest extends BaseEntity {
     reference: string;
     
     @ApiProperty()
-    @Column({nullable: true, type: 'double'})
+    @Column('double')
     amount: number;
 
     @ApiProperty()
-    @Column({nullable: true, type: 'float'})
+    @Column('float')
     duration: number;
 
     @ApiProperty()
-    @Column({nullable: true, type: 'double'})
+    @Column('double')
     annual_income: number;
 
     @ApiProperty()
@@ -41,6 +42,30 @@ export class LoanRequest extends BaseEntity {
     @ApiProperty()
     @Column({default: true})
     deferred_month: string;
+
+    @ApiProperty()
+    @Column({nullable: true})
+    idcard1: string;
+    
+    @ApiProperty()
+    @Column({nullable: true})
+    idcard2: string;
+
+    @ApiProperty()
+    @Column({nullable: true})
+    filename1: string;
+
+    @ApiProperty()
+    @Column({nullable: true})
+    filename2: string;
+
+    @ApiProperty()
+    @Column({nullable: true})
+    name1: string;
+
+    @ApiProperty()
+    @Column({nullable: true})
+    name2: string;
 
     @ApiProperty()
     @Column({default: true})
