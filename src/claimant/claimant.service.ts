@@ -8,7 +8,7 @@ export class ClaimantService {
   async create(createClaimantDto: CreateClaimantDto) {
     const claimant = Claimant.create(createClaimantDto);
     await claimant.save();
-    return claimant
+    return claimant;
    }
  
    async showById(id: number): Promise<Claimant>

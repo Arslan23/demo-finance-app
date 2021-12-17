@@ -14,11 +14,11 @@ export class Claimant extends BaseEntity {
     uuid: string;
 
     @ApiProperty()
-    @Column({type: "varchar",length: 150})
+    @Column()
     firstname: string;
     
     @ApiProperty()
-    @Column({type: "varchar",length: 150})
+    @Column()
     lastname: string;
     
     @ApiProperty()
@@ -40,7 +40,7 @@ export class Claimant extends BaseEntity {
     updatedAt: Date;
     
     @ApiProperty()
-    @Column({type: "varchar",length: 150, nullable: true})
+    @Column()
     phone1: string;
     
     @ApiProperty()
@@ -48,7 +48,7 @@ export class Claimant extends BaseEntity {
     phone2: string;
 
     @ApiProperty()
-    @Column({type: "varchar",length: 150, nullable: true})
+    @Column()
     city: string;
      
     @ApiProperty()

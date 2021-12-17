@@ -32,11 +32,11 @@ export class LoanRequest extends BaseEntity {
     annual_income: number;
 
     @ApiProperty()
-    @ManyToOne(()=> LoanType, loantype => loantype.loanRequests)
+    @ManyToOne(()=> LoanType, loantype => loantype.loanRequests, {cascade: true, eager: true})
     loantype: LoanType
     
     @ApiProperty()
-    @ManyToOne(()=> Claimant, claimant => claimant.id)
+    @ManyToOne(()=> Claimant, claimant => claimant.id, {cascade: true, onDelete: 'CASCADE'})
     claimant: Claimant;
 
     @ApiProperty()

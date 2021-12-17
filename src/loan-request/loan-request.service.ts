@@ -14,38 +14,15 @@ import { LoanRequest } from './entities/loan-request.entity';
 export class LoanRequestService {
     async create(createLoanRequestDto: CreateLoanRequestDto) {
     let claimant = Claimant.create(createLoanRequestDto.claimant).save();
+    console.log("Claimant:", claimant);
+    console.log(createLoanRequestDto);
     createLoanRequestDto.claimant = await claimant;
     const loanRequest = LoanRequest.create(createLoanRequestDto);
     await loanRequest.save();
     return loanRequest;
    }
 
-   async createTransaction(createLoanClaimantRequestDto: CreateLoanClaimantRequestDto, createGuaranteeDto: CreateGuaranteeDto[]) {
-   /* let claimant = Claimant.create(createLoanClaimantRequestDto.claimant).save();
-    createLoanClaimantRequestDto.claimant = await claimant;
-    const loanRequest = await LoanRequest.create(createLoanClaimantRequestDto).save();
-    if(createGuaranteeDto.length > 0)
-    {
-      for(var guarantee of createGuaranteeDto)
-      {
-          guarantee.loanRequest = await loanRequest;
-          let g = await Guarantee.create(guarantee).save();
-          if(guarantee.documents.length>0)
-          {
-            for(var doc of guarantee.documents)
-            {
-               doc.guarantee = g;
-               await Document.create(doc).save();
-            }
-          }
-        }
-    }
    
-   
-    
-    return loanRequest; */
-   }
- 
    async showById(id: number): Promise<LoanRequest>
      {
          const demandePret = await this.findById(id);
@@ -71,5 +48,11 @@ export class LoanRequestService {
     const loanRequest =  await LoanRequest.findOne(id);
     loanRequest.isDeleted = true;
     return loanRequest.save()
+  }
+
+
+  async multiCriteriaSearch(): Promise<LoanRequest[]>
+  {
+    return null;
   }
 }
