@@ -1,7 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Claimant } from "src/claimant/entities/claimant.entity";
 import { LoanType } from "src/loan-type/entities/loan-type.entity";
-import { BaseEntity, Column, CreateDateColumn, Entity, Generated, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import ShortUniqueId from "short-unique-id";
+import { BaseEntity, BeforeInsert, Column, CreateDateColumn, Entity, Generated, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class LoanRequest extends BaseEntity {
@@ -40,7 +41,7 @@ export class LoanRequest extends BaseEntity {
 
     @ApiProperty()
     @Column({default: true})
-    deferred_month: string;
+    deferred_month: number;
 
     @ApiProperty()
     @Column({default: true})
@@ -59,5 +60,10 @@ export class LoanRequest extends BaseEntity {
     @Column()
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @BeforeInsert()
+    setReference() {
+        this.reference = 'D-' + new ShortUniqueId({ length: 6 });
+    }
 
 }

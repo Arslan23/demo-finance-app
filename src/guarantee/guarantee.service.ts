@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateGuaranteeDto } from './dto/create-guarantee.dto';
 import { UpdateGuaranteeDto } from './dto/update-guarantee.dto';
+import { UploadMultipleGuaranteeDto } from './dto/upload-multiple-guarantee.dto';
 import { Guarantee } from './entities/guarantee.entity';
 
 

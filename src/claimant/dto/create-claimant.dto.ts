@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsEmail, IsEmpty, IsNotEmpty, IsPhoneNumber } from "class-validator"
+import { IsDate, IsDateString, IsEmail, IsEmpty, IsNotEmpty, IsOptional, IsPhoneNumber } from "class-validator"
 
 export class CreateClaimantDto {
     
@@ -13,10 +13,11 @@ export class CreateClaimantDto {
 
     @ApiProperty()
     @IsEmail()
+    @IsNotEmpty()
     email: string;
 
     @ApiProperty()
-    @IsDate()
+    @IsDateString()
     birthdate: Date;
 
 
@@ -25,11 +26,12 @@ export class CreateClaimantDto {
     city: string;
 
     @ApiProperty()
-    @IsPhoneNumber()
+    @IsPhoneNumber("BJ")
     phone1: string;
 
     @ApiProperty()
-    @IsPhoneNumber()
+    @IsOptional()
+    @IsPhoneNumber("BJ")
     phone2: string;
 
     @ApiProperty()
@@ -41,6 +43,6 @@ export class CreateClaimantDto {
     nationality: string;
  
     @ApiProperty()
-    @IsDate()
+    @IsDateString()
     living_address_since: Date;
 }

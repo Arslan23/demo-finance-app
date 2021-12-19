@@ -1,24 +1,27 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsNotEmptyObject } from "class-validator";
-import { Claimant } from "src/claimant/entities/claimant.entity";
+import { Type } from "class-transformer";
+import { IsNotEmpty, IsNotEmptyObject, Max, Min, ValidateNested, ArrayNotEmpty } from "class-validator";
+import { CreateClaimantDto } from "src/claimant/dto/create-claimant.dto";
 import { LoanType } from "src/loan-type/entities/loan-type.entity";
 
 export class CreateLoanRequestDto {
     
     @ApiProperty()
-    @IsNotEmpty()
     reference: string;
 
     @ApiProperty()
     @IsNotEmpty()
+    @Min(20000) // @todo: make configurable
     amount: number;
 
     @ApiProperty()
     @IsNotEmpty()
-    deferred_month: string;
+    deferred_month: number;
 
     @ApiProperty()
     @IsNotEmpty()
+    @Min(3) // @todo: make configurable
+    @Max(24) // @todo: make configurable
     duration: number;
 
 
@@ -27,11 +30,17 @@ export class CreateLoanRequestDto {
     annual_income: number;
 
     @ApiProperty()
-    @IsNotEmptyObject()
+    @IsNotEmpty()
     loanType: LoanType;
 
     @ApiProperty()
     @IsNotEmptyObject()
-    claimant: Claimant;
+    @ValidateNested()
+    @Type(() => CreateClaimantDto)
+    claimant: CreateClaimantDto;
+
+    @ApiProperty()
+    @ArrayNotEmpty()
+    guarantee;
 
 }

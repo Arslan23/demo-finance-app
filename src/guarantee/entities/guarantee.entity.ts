@@ -25,16 +25,16 @@ export class Guarantee  extends BaseEntity{
     guaranteeType: GuaranteeType;
 
     @ApiProperty()
-    @ManyToOne(()=> Document, document => document.id)
-    document: Document;
+    @Column({nullable: true})
+    path: string;
     
-    @ApiProperty()
+    /*@ApiProperty()
     @Column({nullable: true})
     idcard1: string;
     
     @ApiProperty()
     @Column({nullable: true})
-    idcard2: string;
+    idcard2: string;*/
 
     @ApiProperty()
     @Column({default: true})

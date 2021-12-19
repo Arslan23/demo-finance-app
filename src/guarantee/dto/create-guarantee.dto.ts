@@ -15,10 +15,10 @@ export class CreateGuaranteeDto {
     guaranteeType: GuaranteeType;
 
     @ApiProperty()
-    @IsNotEmptyObject()
-    document: Document;
+    @IsNotEmpty()
+    path: string;
 
-    @ApiProperty()
+    /*@ApiProperty()
     @IsNotEmpty()
     idcard1: string;
 
@@ -27,7 +27,6 @@ export class CreateGuaranteeDto {
     idcard2: string;
 
 
-    
     @ApiProperty()
     @IsNotEmpty()
     name1: string;
@@ -35,6 +34,6 @@ export class CreateGuaranteeDto {
     
     @ApiProperty()
     @IsNotEmpty()
-    name2: string;
+    name2: string;*/
 
 }
