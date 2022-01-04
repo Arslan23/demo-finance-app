@@ -26,18 +26,21 @@ export class CreateLoanRequestDto {
 
 
     @ApiProperty()
-    @IsNotEmpty()
     annual_income: number;
 
     @ApiProperty()
     @IsNotEmpty()
-    loanType: LoanType;
+    loanType: any;
 
     @ApiProperty()
     @IsNotEmptyObject()
     @ValidateNested()
     @Type(() => CreateClaimantDto)
     claimant: CreateClaimantDto;
+
+    @ApiProperty()
+    @IsNotEmpty()
+    guaranteeType;
 
     @ApiProperty()
     @ArrayNotEmpty()

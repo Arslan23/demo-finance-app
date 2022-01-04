@@ -43,6 +43,6 @@ export class CreateClaimantDto {
     nationality: string;
  
     @ApiProperty()
-    @IsDateString()
+    //@IsDateString()
     living_address_since: Date;
 }

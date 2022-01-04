@@ -32,8 +32,9 @@ export class LoanRequest extends BaseEntity {
     annual_income: number;
 
     @ApiProperty()
-    @ManyToOne(()=> LoanType, loantype => loantype.loanRequests)
+    @ManyToOne( type => LoanType, loantype => loantype.loanRequests)
     loantype: LoanType
+    
     
     @ApiProperty()
     @ManyToOne(()=> Claimant, claimant => claimant.id)
@@ -63,7 +64,8 @@ export class LoanRequest extends BaseEntity {
 
     @BeforeInsert()
     setReference() {
-        this.reference = 'D-' + new ShortUniqueId({ length: 6 });
+        const uid = new ShortUniqueId({ length: 6 });
+        this.reference = 'D-' + uid();
     }
 
 }

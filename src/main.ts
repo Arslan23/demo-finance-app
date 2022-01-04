@@ -8,11 +8,12 @@ const port = process.env.PORT;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
-  app.enableCors({
+  app.enableCors();
+  /*app.enableCors({
     origin: '*',
     methods: 'GET, PUT, POST, DELETE',
     allowedHeaders: 'Content-Type, Authorization'
-  });
+  });*/
   const config = new DocumentBuilder()
   .setTitle('Vf app ressources')  
   .setDescription('The VF API description')

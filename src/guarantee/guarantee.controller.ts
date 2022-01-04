@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UseInterceptors, UploadedFiles } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UseInterceptors, UploadedFiles, UploadedFile } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { AnyFilesInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { AnyFilesInterceptor, FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { diskStorage } from 'multer';
 import { CreateGuaranteeDto } from './dto/create-guarantee.dto';
@@ -38,15 +38,11 @@ export class GuaranteeController {
   @Post('uploads')
   @ApiOperation({summary: 'Upload multiple guarantee'})
   @ApiResponse({status: 401})
-  @UseInterceptors(AnyFilesInterceptor({ storage: storage }))
+  @UseInterceptors(FileInterceptor('guarantee', { storage: storage }))
   uploadMultipleGuarantee(@Body() body,
-  @UploadedFiles() files: Array<Express.Multer.File>) {
+  @UploadedFile() file: Express.Multer.File) {
     let data = []
-    for(let i=0; i<files.length; i++) {
-      let file = files[i];
-      data.push([file.fieldname, file.path, file.filename]);
-    }
-
+    data.push([file.path, file.filename]);
     return data;
   }
 
