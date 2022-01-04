@@ -1,2 +1,0 @@
-java -jar bundletool.jar build-apks --bundle=C:\Users\ProBook\AndroidStudioProjects\MKLG\app\release\app-release.aab --output=C:\Users\ProBook\AndroidStudioProjects\MKLG\app\release\my-app.apks --mode=universal --ks=C:\Users\ProBook\Documents\mykey3.jks --ks-pass=pass:behaviour --ks-key-alias=Mykey3 --key-pass=pass:behaviour
-Error: Unable to access jarfile bundletool.jar
